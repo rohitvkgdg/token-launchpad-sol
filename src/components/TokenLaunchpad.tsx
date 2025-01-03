@@ -71,25 +71,23 @@ export function TokenLaunchpad() {
       <div className="grid grid-cols-1 gap-2 w-1/4">
         <Input type="text" placeholder="Name" ref={nameRef} />
         <br />
-        <Input
-          type="text"
-          placeholder="Symbol"
-          ref={symbolRef}
-          />
+        <Input type="text" placeholder="Symbol" ref={symbolRef} />
         <br />
-        <Input
-          type="text"
-          placeholder="Image URL"
-          ref={imageUrlRef}
-          />
+        <Input type="text" placeholder="Image URL" ref={imageUrlRef} />
         <br />
         <Input
           type="text"
           placeholder="Initial Supply"
           ref={initialSupplyRef}
-          />
+        />
         <br />
-        <Button className="w-fit place-self-center" variant = "outline" onClick={createToken}>Create a token</Button>
+        <Button
+          className="w-fit place-self-center"
+          variant="outline"
+          onClick={createToken}
+        >
+          Create a token
+        </Button>
       </div>
     </div>
   );
