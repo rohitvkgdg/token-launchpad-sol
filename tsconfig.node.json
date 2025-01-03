@@ -9,9 +9,9 @@
     /* Bundler mode */
     "moduleResolution": "bundler",
     "isolatedModules": true,
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": false,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false,
     "composite": true,
 
     /* Linting */

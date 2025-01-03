@@ -9,8 +9,21 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Keypair, SystemProgram, Transaction } from "@solana/web3.js";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
-export function TokenLaunchpad() {
+interface TokenLaunchpadProps {
+  network: "mainnet" | "devnet";
+  setNetwork: (network: "mainnet" | "devnet") => void;
+}
+
+export function TokenLaunchpad({ network, setNetwork }: TokenLaunchpadProps) {
   const wallet = useWallet();
   const { connection } = useConnection();
 
@@ -69,18 +82,22 @@ export function TokenLaunchpad() {
         <h1 className="text-5xl font-bold p-10">Solana Token Launchpad</h1>
       </div>
       <div className="grid grid-cols-1 gap-2 w-1/4">
+
+        <Select value={network} onValueChange={(value: "mainnet" | "devnet") => setNetwork(value)}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select network" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="mainnet">Mainnet</SelectItem>
+              <SelectItem value="devnet">Devnet</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
         <Input type="text" placeholder="Name" ref={nameRef} />
-        <br />
         <Input type="text" placeholder="Symbol" ref={symbolRef} />
-        <br />
         <Input type="text" placeholder="Image URL" ref={imageUrlRef} />
-        <br />
-        <Input
-          type="text"
-          placeholder="Initial Supply"
-          ref={initialSupplyRef}
-        />
-        <br />
+        <Input type="text" placeholder="Initial Supply" ref={initialSupplyRef} />
         <Button
           className="w-fit place-self-center"
           variant="outline"
