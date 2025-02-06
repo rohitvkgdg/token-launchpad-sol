@@ -9,14 +9,8 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Keypair, SystemProgram, Transaction } from "@solana/web3.js";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
 
 interface TokenLaunchpadProps {
   network: "mainnet" | "devnet";
@@ -81,30 +75,40 @@ export function TokenLaunchpad({ network, setNetwork }: TokenLaunchpadProps) {
       <div>
         <h1 className="text-5xl font-bold p-10">Solana Token Launchpad</h1>
       </div>
-      <div className="grid grid-cols-1 gap-2 w-1/4">
+      <div className="grid grid-cols-1 w-1/5">
+        <Tabs defaultValue="devnet" className="w-[400px]">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="mainnet">Mainnet</TabsTrigger>
+            <TabsTrigger value="devnet">Devnet</TabsTrigger>
+          </TabsList>
+          <TabsContent value={network} className="grid grid-cols-1 gap-5">
+            <Input type="text" className="bg-transparent text-black" placeholder="Name" ref={nameRef} />
+            <Input type="text" className="bg-transparent text-black" placeholder="Symbol" ref={symbolRef} />
+            <Input type="text" className="bg-transparent text-black" placeholder="Image URL" ref={imageUrlRef} />
+            <Input type="text" className="bg-transparent text-black" placeholder="Initial Supply" ref={initialSupplyRef} />
+            <Button
+              className="w-fit border place-self-center text-white bg-black dark:text-black dark:bg-white"
+              variant="destructive"
+              onClick={createToken}
+            >
+              CREATE TOKEN
+            </Button>
+          </TabsContent>
+          <TabsContent value="devnet" className="grid grid-cols-1 gap-5">
+            <Input type="text" className="bg-transparent text-black" placeholder="Name" ref={nameRef} />
+            <Input type="text" className="bg-transparent text-black" placeholder="Symbol" ref={symbolRef} />
+            <Input type="text" className="bg-transparent text-black" placeholder="Image URL" ref={imageUrlRef} />
+            <Input type="text" className="bg-transparent text-black" placeholder="Initial Supply" ref={initialSupplyRef} />
+            <Button
+              className="w-fit border place-self-center text-white bg-black dark:text-black dark:bg-white"
+              variant="destructive"
+              onClick={createToken}
+            >
+              CREATE TOKEN
+            </Button>
+          </TabsContent>
+        </Tabs>
 
-        <Select value={network} onValueChange={(value: "mainnet" | "devnet") => setNetwork(value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select network" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="mainnet">Mainnet</SelectItem>
-              <SelectItem value="devnet">Devnet</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-        <Input type="text" placeholder="Name" ref={nameRef} />
-        <Input type="text" placeholder="Symbol" ref={symbolRef} />
-        <Input type="text" placeholder="Image URL" ref={imageUrlRef} />
-        <Input type="text" placeholder="Initial Supply" ref={initialSupplyRef} />
-        <Button
-          className="w-fit place-self-center"
-          variant="outline"
-          onClick={createToken}
-        >
-          Create a token
-        </Button>
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div className="flex flex-col h-full w-full bg-gray-100 dark:bg-gray-900">
+      <div className="flex flex-col h-full w-full bg-gray-100 dark:bg-black">
         <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={[]} autoConnect>
             <WalletModalProvider>
